@@ -28,7 +28,9 @@ export default function Description({ song, author }) {
         </div>
         <div className="about-artist-text-container flex flex-col gap-4">
           {" "}
-          <div className="artist-name text-white font-bold">{song.songName}</div>
+          <div className="artist-name text-white font-bold">
+            {song.songName}
+          </div>
           <div className="artist-follow flex">
             <div className="followers flex-1 flex items-center">
               50000 right now follows
@@ -40,11 +42,18 @@ export default function Description({ song, author }) {
               </button>
             </div>
           </div>
-          <div className="artist-short-desc">
-            {author.biograph}
+          <div className="artist-short-desc">{author.biograph}</div>
+        </div>
+        
+      </div>
+      <div className="credit-container bg-[var(--help-color2)] text-white rounded-xl
+        flex flex-col justify-center items-center
+      ">
+        <p>CREDIT</p>
+          <div className="font-thin">
+            {song.credit}
           </div>
         </div>
-      </div>
     </div>
   );
 }

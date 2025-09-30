@@ -7,32 +7,36 @@
     background-color:var(--background-color)
 }
 
-.about-artist-text-container{
+.description .about-artist-text-container{
     @apply p-[12px];
 }
 
-.title__paragraph{
+.description .title__paragraph{
     color:var(--main-color);
 }
 
-.author-title{
+.description .author-title{
     @apply p-[1rem] bg-[var(--accent-color3)]
 
 }
 
-.description-about{
+.description .description-about{
     background-color:var(--accent-color3)
 }
 
-.followers{
+.description .followers{
     font-weight:500;
     color:var(--help-color);
     font-size:1.1rem;
 }
 
-.follow__button{
+.description .follow__button{
     @apply px-3 py-1
 }
-.follow__button:hover{
+.description .follow__button:hover{
     @apply bg-[var(--accent-color2)] cursor-pointer
+}
+
+.description .credit-container{
+    @apply p-3
 }

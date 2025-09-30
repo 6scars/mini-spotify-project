@@ -1,10 +1,58 @@
-import './Music.css'
-export default function Music({songs, authors, setSong, setAuthor}) {
-  function chooseSong (e) {
-    const findedSong = songs.find(song => song.id === e);
-    const findedAuthor = authors.find(author => author.id === findedSong.authors[0])
-    setSong(findedSong)
-    setAuthor(findedAuthor)
+import "./Music.css";
+export default function Music({
+  songs,
+  authors,
+  setSong,
+  setAuthor,
+  setShow,
+  latest,
+  setLatest,
+}) {
+  function chooseSong(e) {
+    const findedSong = songs.find((song) => song.id === e);
+    const findedAuthor = authors.find(
+      (author) => author.id === findedSong.authors[0]
+    );
+    setSong(findedSong);
+    setAuthor(findedAuthor);
+    setShow(true);
+    latestListened(findedSong);
+
+    console.log(latest);
+  }
+
+  function latestListened(newSong) {
+    if (!latest) setLatest([newSong]);
+
+    const index = latest.findIndex((s) => s.id === newSong.id);
+
+    setLatest((prev) => {
+      /*if NOT finded song in previous*/
+      if (index === -1) {
+        /*if NOT finded song and length equals 6*/
+        if (prev.length === 6) {
+          const newArray = [...prev]
+          newArray.pop()
+          return [newSong, ...newArray];
+        }
+        return [newSong, ...prev];
+        /*if finded song in previous*/
+      } else {
+        /*if finded song and length equals 6*/
+        if (prev.length === 6) {
+          const newArray = [...prev];
+          newArray.splice(index, 1);
+          newArray.pop()
+          return [newSong, ...newArray];
+        }
+      
+          const newArray = [...prev];
+          newArray.splice(index, 1);
+          return [newSong, ...newArray];
+        
+      }
+    });
+
   }
 
   return (
@@ -22,17 +70,17 @@ export default function Music({songs, authors, setSong, setAuthor}) {
       </div>
       <div className="main-songs ">
         <div className="play-lists gap-2 grid grid-cols-3">
-          {Array.from({ length: 4 }).map((_, i) => {
+          {latest.map((l) => {
             return (
-              <div key={i} className="playlist ">
+              <div key={l.id} className="playlist ">
                 <div className="playlist-image-container">
                   <img
                     className="playlist__image"
-                    src={`mini-spotify/images/songPictures/cat${i + 1}.jpg`}
+                    src={`mini-spotify/images/songPictures/${l.songImage}`}
                   ></img>
                 </div>
                 <div className="playlist-title-container">
-                  <p className="playlist__title">title</p>
+                  <p className="playlist__title">{l.songName}</p>
                 </div>
               </div>
             );
@@ -41,7 +89,7 @@ export default function Music({songs, authors, setSong, setAuthor}) {
 
         {Array.from({ length: 4 }).map((_, i) => {
           return (
-            <div key={i} className="songs cursor-pointer" >
+            <div key={i} className="songs cursor-pointer">
               <div className="songs-title-container text-white font-bold">
                 <p className="songs__title">Preapared for You</p>
               </div>
@@ -49,7 +97,9 @@ export default function Music({songs, authors, setSong, setAuthor}) {
                 {songs.map((song) => {
                   return (
                     <div
-                      onClick={()=>{chooseSong(song.id)}}
+                      onClick={() => {
+                        chooseSong(song.id);
+                      }}
                       key={song.id}
                       className="song-container-outer bg-transparent flex justify-center"
                     >

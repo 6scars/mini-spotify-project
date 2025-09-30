@@ -1,7 +1,10 @@
 
 import './Header.css'
+import playlists from "../../public/data/playlists.json"
+
 
 export default function Header() {
+  console.log(playlists)
   return (
     <header
       className="fixed top-0 flex justify-betwen

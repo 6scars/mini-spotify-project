@@ -1,16 +1,23 @@
 import "./Aside.css";
-export default function Aside() {
+import playlists from "../../public/data/playlists.json"
+export default function Aside({show}) {
+  const choosePlaylist = (playlistId)=>{  
+    console.log(playlistId)
+  }
+  console.log(show)
+  
   return (
     <aside
-      className="leftBar red-scroll-bar fixed top-[89px] bottom-[120px] bg-gray-900 rounded-xl
+      className={`leftBar red-scroll-bar fixed top-[89px] bottom-[0px] bg-gray-900 rounded-xl
             flex flex-col items-center gap-[10px] 
             overflow-y-auto
-        "
+            ${show ? 'show' : ''}`}
     >
-      {Array.from({ length: 20 }).map((_, i) => (
+      {playlists.map((playlist) => (
         <div
-            key={i}
-          className="playlists-container bg-red-700 w-[75%] h-[150px]
+            key={playlist.id}
+            onClick={()=>{choosePlaylist(playlist.id)}}
+          className="playlists-container bg-red-700 w-[75%] h-[150px] cursor-pointer
             flex flex-col
             "
         >
@@ -22,7 +29,9 @@ export default function Aside() {
             />
           </div>
           <div className="playlist-paragraph-container w-full">
-            <p className="playlist__paragraph text-white text-[12px] font-bold text-bold text-center w-full">Favourite</p>
+            <p className="playlist__paragraph text-white text-[12px] font-bold text-bold text-center w-full">
+              {playlist.name}
+              </p>
             
             
           </div>

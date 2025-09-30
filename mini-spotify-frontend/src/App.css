@@ -68,3 +68,10 @@ body {
 .red-scroll-bar::-webkit-scrollbar-thumb:hover {
   background-color: #FF5252;
 }
+
+
+/*---------------------SHOW--------------------------------*/
+
+.show{
+  bottom:120px;
+}
